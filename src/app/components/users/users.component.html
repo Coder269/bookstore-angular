@@ -1,0 +1,25 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <ol class="list-group list-group-numbered">
+    <li class="list-group-item" *ngFor="let user of users">
+      {{ user.firstname }} {{ user.lastname }} {{ user.email }}
+      <strong>{{ user.role }}</strong>
+      <br /><br />
+      <button
+        type="button"
+        class="btn btn-success me-2"
+        (click)="makeAdmin(user.email)"
+        *ngIf="user.role !== 'ADMIN'"
+      >
+        Make Admin
+      </button>
+      <button
+        type="button"
+        class="btn btn-danger"
+        (click)="deleteUser(user.id)"
+      >
+        Delete
+      </button>
+    </li>
+  </ol>
+</div>
