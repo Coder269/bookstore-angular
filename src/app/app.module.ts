@@ -13,6 +13,10 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { TransactionsComponent } from './components/transactions/transactions.component';
 import { BooksComponent } from './components/books/books.component';
 import { UsersComponent } from './components/users/users.component';
+import { AddBookComponent } from './components/add-book/add-book.component';
+import { BookCardComponent } from './components/book-card/book-card.component';
+import { BookComponent } from './components/book/book.component';
+import { AllTransactionsComponent } from './components/all-transactions/all-transactions.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +29,10 @@ import { UsersComponent } from './components/users/users.component';
     TransactionsComponent,
     BooksComponent,
     UsersComponent,
+    AddBookComponent,
+    BookCardComponent,
+    BookComponent,
+    AllTransactionsComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [],

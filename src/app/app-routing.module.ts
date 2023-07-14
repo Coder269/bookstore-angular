@@ -8,18 +8,32 @@ import { authGuard } from './Guard/auth.guard';
 import { TransactionsComponent } from './components/transactions/transactions.component';
 import { UsersComponent } from './components/users/users.component';
 import { BooksComponent } from './components/books/books.component';
+import { AddBookComponent } from './components/add-book/add-book.component';
+import { BookComponent } from './components/book/book.component';
+import { AllTransactionsComponent } from './components/all-transactions/all-transactions.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [authGuard] },
   { path: 'home', component: HomeComponent, canActivate: [authGuard] },
   {
-    path: 'transactions',
+    path: 'history',
     component: TransactionsComponent,
     canActivate: [authGuard],
   },
   {
+    path: 'transactions',
+    component: AllTransactionsComponent,
+    canActivate: [authGuard],
+  },
+  { path: 'book/:id', component: BookComponent, canActivate: [authGuard] },
+  {
     path: 'users',
     component: UsersComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'addbook',
+    component: AddBookComponent,
     canActivate: [authGuard],
   },
   {

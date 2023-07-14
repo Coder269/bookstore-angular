@@ -1,0 +1,72 @@
+<div class="container mt-3">
+  <h1>Add Book</h1>
+  <br />
+  <form #form="ngForm" (ngSubmit)="addBook(form)">
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Title:</label>
+      <input
+        ngModel
+        name="title"
+        type="text"
+        class="form-control"
+        id="exampleInputEmail1"
+        aria-describedby="emailHelp"
+        required
+      />
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Author:</label>
+      <input
+        ngModel
+        name="author"
+        type="text"
+        class="form-control"
+        id="exampleInputEmail1"
+        aria-describedby="emailHelp"
+        required
+      />
+    </div>
+
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Description:</label>
+      <textarea
+        ngModel
+        name="description"
+        #email="ngModel"
+        type="email"
+        class="form-control"
+        cols="30"
+        rows="10"
+        required
+      ></textarea>
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label">Price:</label>
+      <input
+        ngModel
+        name="price"
+        type="number"
+        class="form-control"
+        id="exampleInputPassword1"
+        required
+      />
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label">Image Url:</label>
+      <input
+        ngModel
+        name="imageUrl"
+        type="text"
+        class="form-control"
+        id="exampleInputPassword1"
+        required
+      />
+    </div>
+    <div style="text-align: center" class="mb-4">
+      <button type="submit" class="btn btn-primary me-2">Create</button>
+      <button type="button" class="btn btn-secondary" routerLink="/books">
+        Cancel
+      </button>
+    </div>
+  </form>
+</div>

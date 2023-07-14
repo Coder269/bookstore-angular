@@ -1,0 +1,9 @@
+<div class="border border-2 border-primary">
+  <div class="d-flex flex-column p-3">
+    <img [src]="imageUrl" />
+    <h3 [routerLink]="['/book', id]">{{ title }}</h3>
+    <p><em>author: </em> {{ author }}</p>
+    <p>Added: {{ addTime | date : "mediumDate" }}</p>
+    <h4 style="text-align: center">{{ price | currency : "EUR" }}</h4>
+  </div>
+</div>

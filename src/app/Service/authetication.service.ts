@@ -7,6 +7,7 @@ import {
   HttpHeaders,
 } from '@angular/common/http';
 import { Role } from '../Model/Role';
+import { User } from '../Model/User';
 
 const API_URL = environment.baseApiUrl;
 
@@ -14,9 +15,7 @@ const API_URL = environment.baseApiUrl;
   providedIn: 'root',
 })
 export class AutheticationService {
-  currentUserRole: Role = Role.USER;
-  currentUserFirstname: string = '';
-  currentUserLastname: string = '';
+  currentUser: User = new User('', '', '', '');
 
   constructor(private http: HttpClient) {}
 

@@ -1,2 +1,26 @@
-<app-navbar></app-navbar>
-<p>home works!</p>
+<app-navbar></app-navbar> <br />
+<form #form="ngForm" (ngSubmit)="search(form)" role="search">
+  <div class="d-flex justify-content-center">
+    <input
+      ngModel
+      name="search"
+      type="search"
+      placeholder="Search"
+      aria-label="Search"
+      class="me-2"
+    />
+    <button class="btn btn-outline-success" type="submit">Search</button>
+  </div>
+</form>
+<br /><br />
+<div class="d-flex flex-row flex-wrap justify-content-around">
+  <app-book-card
+    *ngFor="let book of booksResult"
+    [author]="book.author"
+    [title]="book.title"
+    [imageUrl]="book.imageUrl"
+    [price]="book.price"
+    [addTime]="book.addTime"
+    [id]="book.id"
+  ></app-book-card>
+</div>

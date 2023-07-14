@@ -17,9 +17,9 @@ export class NavbarComponent {
     private authenticationService: AutheticationService,
     private router: Router
   ) {
-    this.currentUserFirstname = authenticationService.currentUserFirstname;
-    this.currentUserLastname = authenticationService.currentUserLastname;
-    this.currentUserRole = authenticationService.currentUserRole;
+    this.currentUserFirstname = authenticationService.currentUser.firstname;
+    this.currentUserLastname = authenticationService.currentUser.lastname;
+    this.currentUserRole = authenticationService.currentUser.role;
   }
 
   logout() {

@@ -1,9 +1,6 @@
 <app-navbar></app-navbar>
 <div class="container mt-3">
-  <h1>My Transactions</h1>
-  <p style="text-align: center" *ngIf="purchases.length === 0">
-    No transactions found!
-  </p>
+  <h1>All Transactions</h1>
   <br />
   <ol class="list-group list-group-numbered">
     <li class="list-group-item" *ngFor="let purchase of purchases">
@@ -13,6 +10,8 @@
       Price: {{ purchase.price | currency : "EUR" }},
       <br />
       Purchase date: {{ purchase.purchaseDate | date : "mediumDate" }}
+      <br />
+      Buyer: {{ purchase.user.firstname }} {{ purchase.user.lastname }}
     </li>
   </ol>
 </div>

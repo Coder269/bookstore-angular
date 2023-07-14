@@ -30,10 +30,13 @@ export class LoginComponent implements OnInit {
           next: (response: any) => {
             // Signin successful, save the token to localStorage
             localStorage.setItem('token', response.jwt);
-            this.authenticationService.currentUserFirstname =
+            this.authenticationService.currentUser.firstname =
               response.firstname;
-            this.authenticationService.currentUserLastname = response.lastname;
-            this.authenticationService.currentUserRole = response.role;
+            this.authenticationService.currentUser.lastname = response.lastname;
+            this.authenticationService.currentUser.role = response.role;
+            this.authenticationService.currentUser.email = response.email;
+            this.authenticationService.currentUser.password = response.password;
+            this.authenticationService.currentUser.id = response.id;
             // Redirect to protected page or home page
             this.router.navigate(['/home']);
           },

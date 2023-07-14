@@ -1,8 +1,8 @@
-import { Book } from "./Book";
-import { User } from "./User";
+import { Book } from './Book';
+import { User } from './User';
 
 export class Purchase {
-  id: number | undefined;
+  id: number = 0;
   user: User;
   book: Book;
   price: number;
@@ -13,5 +13,4 @@ export class Purchase {
     this.book = book;
     this.price = price;
   }
-
 }

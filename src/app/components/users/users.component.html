@@ -1,9 +1,13 @@
 <app-navbar></app-navbar>
-<div class="container">
+<div class="container mt-3">
   <ol class="list-group list-group-numbered">
     <li class="list-group-item" *ngFor="let user of users">
-      {{ user.firstname }} {{ user.lastname }} {{ user.email }}
-      <strong>{{ user.role }}</strong>
+      {{ user.firstname }} {{ user.lastname }} <br />
+      {{ user.email }} <br />
+      Role:
+      <strong [style.color]="user.role === 'ADMIN' ? 'green' : 'black'">{{
+        user.role
+      }}</strong>
       <br /><br />
       <button
         type="button"
