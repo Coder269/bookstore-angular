@@ -31,6 +31,12 @@ export class BookService {
     });
   }
 
+  public updateBook(book: Book): Observable<Book> {
+    return this.http.put<Book>(API_URL + 'admin/update-book', book, {
+      headers: this.headers,
+    });
+  }
+
   public deleteBook(id: number): Observable<any> {
     return this.http.delete(API_URL + `admin/delete-book/${id}`, {
       headers: this.headers,
