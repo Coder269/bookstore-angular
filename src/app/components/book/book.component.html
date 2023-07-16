@@ -1,23 +1,33 @@
-<app-navbar></app-navbar>
-<div class="d-lg-flex flex-row justify-content-center mt-3">
-  <div class="me-5">
-    <img class="mb-3" [src]="currentBook.imageUrl" />
-    <p class="mb-3">Added: {{ currentBook.addTime | date : "mediumDate" }}</p>
-    <div style="text-align: center">
-      <h3 class="mb-3">{{ currentBook.price | currency : "EUR" }}</h3>
-      <button *ngIf="!inLibrary" type="button" class="btn btn-primary btn-lg">
-        Buy Book
-      </button>
-      <button *ngIf="inLibrary" type="button" class="btn btn-success btn-lg">
-        In Library
-      </button>
+<div style="background-color: #e1dcc5">
+  <app-navbar></app-navbar>
+  <div class="d-lg-flex flex-row justify-content-center mt-3">
+    <div class="me-5">
+      <img class="mb-3" [src]="currentBook.imageUrl" />
+      <p class="mb-3">Added: {{ currentBook.addTime | date : "mediumDate" }}</p>
+      <div style="text-align: center">
+        <h3 class="mb-3">{{ currentBook.price | currency : "EUR" }}</h3>
+        <button
+          (click)="addToCart()"
+          *ngIf="!inLibrary && !inCart"
+          type="button"
+          class="btn btn-primary btn-lg"
+        >
+          Add to Cart
+        </button>
+        <button *ngIf="inLibrary" type="button" class="btn btn-success btn-lg">
+          In Library
+        </button>
+        <button *ngIf="inCart" type="button" class="btn btn-success btn-lg">
+          In Cart
+        </button>
+      </div>
     </div>
-  </div>
-  <div class="d-flex flex-column">
-    <h2>{{ currentBook.title }}</h2>
-    <p>By: {{ currentBook.author }}</p>
-    <p style="width: 600px">
-      {{ currentBook.description }}
-    </p>
+    <div class="d-flex flex-column">
+      <h2>{{ currentBook.title }}</h2>
+      <p>By: {{ currentBook.author }}</p>
+      <p style="width: 600px">
+        {{ currentBook.description }}
+      </p>
+    </div>
   </div>
 </div>

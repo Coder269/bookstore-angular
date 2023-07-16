@@ -17,6 +17,7 @@ import { AddBookComponent } from './components/add-book/add-book.component';
 import { BookCardComponent } from './components/book-card/book-card.component';
 import { BookComponent } from './components/book/book.component';
 import { AllTransactionsComponent } from './components/all-transactions/all-transactions.component';
+import { CartComponent } from './components/cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { AllTransactionsComponent } from './components/all-transactions/all-tran
     BookCardComponent,
     BookComponent,
     AllTransactionsComponent,
+    CartComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [],

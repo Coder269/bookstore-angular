@@ -1,0 +1,45 @@
+<div style="background-color: #e1dcc5">
+  <app-navbar [items]="userCart.items.length"></app-navbar>
+  <div class="container mt-3">
+    <h1 class="mb-2">My Cart</h1>
+    <br />
+    <h3 style="text-align: center" *ngIf="userCart.items.length === 0">
+      The cart is empty
+    </h3>
+    <table class="table table-secondary" *ngIf="userCart.items.length > 0">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Title</th>
+          <th scope="col">Author</th>
+          <th scope="col">Price</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let book of userCart.items; index as i">
+          <th scope="row">{{ i + 1 }}</th>
+          <td>{{ book.title }}</td>
+          <td>{{ book.author }}</td>
+          <td>{{ book.price | currency : "EUR" }}</td>
+          <td>
+            <button type="button" class="btn btn-danger" (click)="delete(i)">
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <br />
+    <div
+      *ngIf="userCart.items.length > 0"
+      class="d-flex flex-row justify-content-center mb-3"
+    >
+      <h4 class="me-3">Total:</h4>
+      <h4>{{ totalPrice | currency : "EUR" }}</h4>
+    </div>
+    <div *ngIf="userCart.items.length > 0" style="text-align: center">
+      <button type="button" class="btn btn-primary btn-lg">Buy Items</button>
+    </div>
+  </div>
+</div>

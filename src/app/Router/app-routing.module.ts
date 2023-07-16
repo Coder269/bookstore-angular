@@ -11,6 +11,7 @@ import { BooksComponent } from '../components/books/books.component';
 import { AddBookComponent } from '../components/add-book/add-book.component';
 import { BookComponent } from '../components/book/book.component';
 import { AllTransactionsComponent } from '../components/all-transactions/all-transactions.component';
+import { CartComponent } from '../components/cart/cart.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [authGuard] },
@@ -29,6 +30,11 @@ const routes: Routes = [
   {
     path: 'users',
     component: UsersComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'cart',
+    component: CartComponent,
     canActivate: [authGuard],
   },
   {

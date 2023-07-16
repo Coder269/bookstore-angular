@@ -1,33 +1,35 @@
-<app-navbar></app-navbar>
-<div class="container mt-3">
-  <div style="text-align: center">
-    <button type="button" class="btn btn-success" routerLink="/addbook">
-      Create Book
-    </button>
-    <br /><br />
+<div style="background-color: #e1dcc5">
+  <app-navbar></app-navbar>
+  <div class="container mt-3">
+    <div style="text-align: center">
+      <button type="button" class="btn btn-success" routerLink="/addbook">
+        Create Book
+      </button>
+      <br /><br />
+    </div>
+    <ol class="list-group list-group-numbered">
+      <li class="list-group-item mb-3" *ngFor="let book of books">
+        <strong>Title:</strong> {{ book.title }}, <strong>Author:</strong>:
+        {{ book.author }}, <strong>Price:</strong> {{ book.price }} <br /><br />
+        <button
+          type="button"
+          class="btn btn-success me-2"
+          data-bs-toggle="modal"
+          data-bs-target="#updateBook"
+          (click)="updateBookModal(book)"
+        >
+          Update
+        </button>
+        <button
+          type="button"
+          class="btn btn-danger"
+          (click)="deleteBook(book.id)"
+        >
+          Delete
+        </button>
+      </li>
+    </ol>
   </div>
-  <ol class="list-group list-group-numbered">
-    <li class="list-group-item" *ngFor="let book of books">
-      <strong>Title:</strong> {{ book.title }}, <strong>Author:</strong>:
-      {{ book.author }}, <strong>Price:</strong> {{ book.price }} <br /><br />
-      <button
-        type="button"
-        class="btn btn-success me-2"
-        data-bs-toggle="modal"
-        data-bs-target="#updateBook"
-        (click)="updateBookModal(book)"
-      >
-        Update
-      </button>
-      <button
-        type="button"
-        class="btn btn-danger"
-        (click)="deleteBook(book.id)"
-      >
-        Delete
-      </button>
-    </li>
-  </ol>
 </div>
 
 <div

@@ -1,18 +1,23 @@
-<app-navbar></app-navbar>
-<div class="container mt-3">
-  <h1>My Transactions</h1>
-  <p style="text-align: center" *ngIf="purchases.length === 0">
-    No transactions found!
-  </p>
-  <br />
-  <ol class="list-group list-group-numbered">
-    <li class="list-group-item" *ngFor="let purchase of purchases">
-      <strong> {{ purchase.book.title }} </strong> (author:
-      {{ purchase.book.author }})
-      <br />
-      Price: {{ purchase.price | currency : "EUR" }},
-      <br />
-      Purchase date: {{ purchase.purchaseDate | date : "mediumDate" }}
-    </li>
-  </ol>
+<div style="background-color: #e1dcc5">
+  <app-navbar></app-navbar>
+  <div class="container mt-3">
+    <h1>My Transactions</h1>
+    <h3 style="text-align: center" *ngIf="purchases.length === 0">
+      No transactions found!
+    </h3>
+    <br />
+    <ol class="list-group list-group-numbered">
+      <li
+        class="list-group-item bg-dark text-light mb-3"
+        *ngFor="let purchase of purchases"
+      >
+        <strong> {{ purchase.book.title }} </strong> (author:
+        {{ purchase.book.author }})
+        <br />
+        Price: {{ purchase.price | currency : "EUR" }},
+        <br />
+        Purchase date: {{ purchase.purchaseDate | date : "mediumDate" }}
+      </li>
+    </ol>
+  </div>
 </div>

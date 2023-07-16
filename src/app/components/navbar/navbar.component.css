@@ -1,5 +1,3 @@
-.navbar {
-  display: flex;
-  justify-content: flex-end;
-  background-color: aquamarine;
+.nav-item img:hover {
+  cursor: pointer;
 }

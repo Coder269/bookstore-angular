@@ -1,17 +1,19 @@
-<app-navbar></app-navbar>
-<div class="container mt-3">
-  <h1>All Transactions</h1>
-  <br />
-  <ol class="list-group list-group-numbered">
-    <li class="list-group-item" *ngFor="let purchase of purchases">
-      <strong> {{ purchase.book.title }} </strong> (author:
-      {{ purchase.book.author }})
-      <br />
-      Price: {{ purchase.price | currency : "EUR" }},
-      <br />
-      Purchase date: {{ purchase.purchaseDate | date : "mediumDate" }}
-      <br />
-      Buyer: {{ purchase.user.firstname }} {{ purchase.user.lastname }}
-    </li>
-  </ol>
+<div style="background-color: #e1dcc5">
+  <app-navbar></app-navbar>
+  <div class="container mt-3">
+    <h1>All Transactions</h1>
+    <br />
+    <ol class="list-group list-group-numbered">
+      <li class="list-group-item mb-3" *ngFor="let purchase of purchases">
+        <strong> {{ purchase.book.title }} </strong> (author:
+        {{ purchase.book.author }})
+        <br />
+        Price: {{ purchase.price | currency : "EUR" }},
+        <br />
+        Purchase date: {{ purchase.purchaseDate | date : "mediumDate" }}
+        <br />
+        Buyer: {{ purchase.user.firstname }} {{ purchase.user.lastname }}
+      </li>
+    </ol>
+  </div>
 </div>

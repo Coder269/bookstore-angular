@@ -1,76 +1,78 @@
-<div class="container">
-  <div style="text-align: center">
-    <img style="width: 250px; height: 250px" src="assets/logo.png" alt="" />
+<div style="background-color: #e1dcc5">
+  <div class="container">
+    <div style="text-align: center">
+      <img style="width: 250px; height: 250px" src="assets/logo.png" alt="" />
+    </div>
+    <h1>Register</h1>
+    <br />
+    <form #form="ngForm" (ngSubmit)="register(form)">
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">First Name:</label>
+        <input
+          ngModel
+          name="firstname"
+          type="text"
+          class="form-control"
+          id="exampleInputEmail1"
+          aria-describedby="emailHelp"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Last Name:</label>
+        <input
+          ngModel
+          name="lastname"
+          type="text"
+          class="form-control"
+          id="exampleInputEmail1"
+          aria-describedby="emailHelp"
+          required
+        />
+      </div>
+
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Email:</label>
+        <input
+          ngModel
+          name="email"
+          #email="ngModel"
+          type="email"
+          class="form-control"
+          id="exampleInputEmail1"
+          aria-describedby="emailHelp"
+          email
+          required
+        />
+      </div>
+      <div
+        *ngIf="email.errors?.['email']"
+        class="alert alert-danger"
+        role="alert"
+      >
+        Please enter a valid email address!
+      </div>
+
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Password</label>
+        <input
+          ngModel
+          name="password"
+          type="password"
+          class="form-control"
+          id="exampleInputPassword1"
+          required
+        />
+      </div>
+      <div *ngIf="emailTaken" class="alert alert-danger" role="alert">
+        This email address is already taken!
+      </div>
+      <div style="text-align: center" class="mb-4">
+        <button type="submit" class="btn btn-primary">Register</button>
+      </div>
+    </form>
+    <p style="text-align: center">
+      Already have an account? <a routerLink="/login" href="">Login Here</a>
+    </p>
   </div>
-  <h1>Register</h1>
-  <br />
-  <form #form="ngForm" (ngSubmit)="register(form)">
-    <div class="mb-3">
-      <label for="exampleInputEmail1" class="form-label">First Name:</label>
-      <input
-        ngModel
-        name="firstname"
-        type="text"
-        class="form-control"
-        id="exampleInputEmail1"
-        aria-describedby="emailHelp"
-        required
-      />
-    </div>
-    <div class="mb-3">
-      <label for="exampleInputEmail1" class="form-label">Last Name:</label>
-      <input
-        ngModel
-        name="lastname"
-        type="text"
-        class="form-control"
-        id="exampleInputEmail1"
-        aria-describedby="emailHelp"
-        required
-      />
-    </div>
-
-    <div class="mb-3">
-      <label for="exampleInputEmail1" class="form-label">Email:</label>
-      <input
-        ngModel
-        name="email"
-        #email="ngModel"
-        type="email"
-        class="form-control"
-        id="exampleInputEmail1"
-        aria-describedby="emailHelp"
-        email
-        required
-      />
-    </div>
-    <div
-      *ngIf="email.errors?.['email']"
-      class="alert alert-danger"
-      role="alert"
-    >
-      Please enter a valid email address!
-    </div>
-
-    <div class="mb-3">
-      <label for="exampleInputPassword1" class="form-label">Password</label>
-      <input
-        ngModel
-        name="password"
-        type="password"
-        class="form-control"
-        id="exampleInputPassword1"
-        required
-      />
-    </div>
-    <div *ngIf="emailTaken" class="alert alert-danger" role="alert">
-      This email address is already taken!
-    </div>
-    <div style="text-align: center" class="mb-4">
-      <button type="submit" class="btn btn-primary">Register</button>
-    </div>
-  </form>
-  <p style="text-align: center">
-    Already have an account? <a routerLink="/login" href="">Login Here</a>
-  </p>
 </div>

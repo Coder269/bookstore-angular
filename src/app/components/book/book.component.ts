@@ -2,9 +2,12 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Book } from 'src/app/Model/Book';
+import { Cart } from 'src/app/Model/Cart';
 import { Purchase } from 'src/app/Model/Purchase';
+import { User } from 'src/app/Model/User';
 import { AutheticationService } from 'src/app/Service/authetication.service';
 import { BookService } from 'src/app/Service/book.service';
+import { CartService } from 'src/app/Service/cart.service';
 import { TransactionService } from 'src/app/Service/transaction.service';
 
 @Component({
@@ -18,12 +21,15 @@ export class BookComponent implements OnInit {
   id: number = 0;
   userPurchases: Purchase[] = [];
   inLibrary = false;
+  inCart = false;
+  userCart: Cart = new Cart(new User('', '', '', ''));
 
   constructor(
     private bookService: BookService,
     private route: ActivatedRoute,
     private transactionService: TransactionService,
     private authenticationService: AutheticationService,
+    private cartService: CartService,
     private router: Router
   ) {}
 
@@ -56,12 +62,45 @@ export class BookComponent implements OnInit {
             break;
           }
         }
+        this.getUserCart();
       },
       error: (error: HttpErrorResponse) => console.log(error.message),
     });
   }
 
-  buy() {
+  getUserCart() {
+    let userId: number = this.authenticationService.currentUser.id;
+    this.cartService.getUserCart(userId).subscribe({
+      next: (respose: Cart) => {
+        this.userCart = respose;
+        if (this.userCart == null) return;
+        else {
+          for (let book of this.userCart.items) {
+            if (book.id == this.currentBook.id) this.inCart = true;
+          }
+        }
+      },
+      error: (error: HttpErrorResponse) => {
+        console.log(error.message);
+      },
+    });
+  }
+
+  addToCart() {
+    if (this.inCart) return;
+    let userId: number = this.authenticationService.currentUser.id;
+    this.cartService.getUserCart(userId).subscribe({
+      next: (respose: Cart) => {
+        this.userCart = respose;
+        if (this.userCart == null) this.createUserCart();
+        else this.addItem();
+      },
+      error: (error: HttpErrorResponse) => {
+        console.log(error.message);
+      },
+    });
+
+    /*
     let purchase: Purchase = new Purchase(
       this.authenticationService.currentUser,
       this.currentBook,
@@ -72,6 +111,26 @@ export class BookComponent implements OnInit {
         alert('Transaction is successful!');
         this.router.navigate(['/home']);
       },
+      error: (error: HttpErrorResponse) => console.log(error.message),
+    });
+    */
+  }
+  createUserCart() {
+    this.userCart = new Cart(this.authenticationService.currentUser);
+    this.cartService.createCart(this.userCart).subscribe({
+      next: (reponse: Cart) => {
+        this.userCart = reponse;
+        this.addItem();
+      },
+      error: (error: HttpErrorResponse) => console.log(error.message),
+    });
+  }
+
+  addItem() {
+    this.userCart.items.push(this.currentBook);
+    this.userCart.user = this.authenticationService.currentUser;
+    this.cartService.updateCart(this.userCart).subscribe({
+      next: (response: Cart) => (this.inCart = true),
       error: (error: HttpErrorResponse) => console.log(error.message),
     });
   }

@@ -1,50 +1,52 @@
-<div class="container">
-  <div style="text-align: center">
-    <img style="width: 250px; height: 250px" src="assets/logo.png" alt="" />
-  </div>
-  <h1>Login</h1>
-  <br />
-  <form #form="ngForm" (ngSubmit)="login(form)">
-    <div class="mb-3">
-      <label for="exampleInputEmail1" class="form-label">Email address</label>
-      <input
-        required
-        email
-        ngModel
-        name="email"
-        #email="ngModel"
-        type="email"
-        class="form-control"
-        id="exampleInputEmail1"
-        aria-describedby="emailHelp"
-      />
+<div style="background-color: #e1dcc5">
+  <div class="container">
+    <div style="text-align: center">
+      <img style="width: 250px; height: 250px" src="assets/logo.png" alt="" />
     </div>
-    <div
-      *ngIf="email.errors?.['email']"
-      class="alert alert-danger"
-      role="alert"
-    >
-      Please enter a valid email address!
-    </div>
-    <div class="mb-4">
-      <label for="exampleInputPassword1" class="form-label">Password</label>
-      <input
-        required
-        ngModel
-        name="password"
-        type="password"
-        class="form-control"
-        id="exampleInputPassword1"
-      />
-    </div>
-    <div style="text-align: center" class="mb-4">
-      <div *ngIf="invalidLogin" class="alert alert-danger" role="alert">
-        Invalid email or password!
+    <h1>Login</h1>
+    <br />
+    <form #form="ngForm" (ngSubmit)="login(form)">
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Email address</label>
+        <input
+          required
+          email
+          ngModel
+          name="email"
+          #email="ngModel"
+          type="email"
+          class="form-control"
+          id="exampleInputEmail1"
+          aria-describedby="emailHelp"
+        />
       </div>
-      <button type="submit" class="btn btn-primary">Log In</button>
-    </div>
-  </form>
-  <p style="text-align: center">
-    Don't have an account? <a routerLink="/register" href="">Register Here</a>
-  </p>
+      <div
+        *ngIf="email.errors?.['email']"
+        class="alert alert-danger"
+        role="alert"
+      >
+        Please enter a valid email address!
+      </div>
+      <div class="mb-4">
+        <label for="exampleInputPassword1" class="form-label">Password</label>
+        <input
+          required
+          ngModel
+          name="password"
+          type="password"
+          class="form-control"
+          id="exampleInputPassword1"
+        />
+      </div>
+      <div style="text-align: center" class="mb-4">
+        <div *ngIf="invalidLogin" class="alert alert-danger" role="alert">
+          Invalid email or password!
+        </div>
+        <button type="submit" class="btn btn-primary">Log In</button>
+      </div>
+    </form>
+    <p style="text-align: center">
+      Don't have an account? <a routerLink="/register" href="">Register Here</a>
+    </p>
+  </div>
 </div>

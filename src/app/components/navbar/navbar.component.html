@@ -1,4 +1,7 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav
+  class="navbar navbar-expand-lg bg-secondary border-bottom border-bottom-dark"
+  data-bs-theme="dark"
+>
   <div class="container-fluid">
     <img src="assets/logo.png" style="width: 50px; height: 50px" />
     <a class="navbar-brand">Book Store</a>
@@ -15,7 +18,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
+        <li class="nav-item me-1">
           <a
             class="nav-link active"
             aria-current="page"
@@ -24,8 +27,19 @@
             >Home</a
           >
         </li>
-        <li class="nav-item">
+        <li class="nav-item me-1">
           <a class="nav-link" href="" routerLink="/history">My Transactions</a>
+        </li>
+        <li class="nav-item me-2 d-flex">
+          <img
+            src="assets/cart.png"
+            style="width: 40px; height: 40px"
+            routerLink="/cart"
+          />
+          <div *ngIf="items === 0">Empty</div>
+          <div *ngIf="items > 0">
+            <strong> {{ items }} items</strong>
+          </div>
         </li>
         <li class="nav-item dropdown" *ngIf="currentUserRole === 'ADMIN'">
           <a
@@ -53,12 +67,10 @@
         </li>
       </ul>
       <img src="assets/avatar.png" style="width: 50px; height: 50px" />
-      <label class="nav-item me-3">
+      <label class="nav-item me-3 text-light">
         <strong> {{ currentUserFirstname }} {{ currentUserLastname }} </strong>
       </label>
-      <button class="btn btn-outline-success" (click)="logout()">
-        Log Out
-      </button>
+      <button class="btn btn-warning" (click)="logout()">Log Out</button>
     </div>
   </div>
 </nav>
