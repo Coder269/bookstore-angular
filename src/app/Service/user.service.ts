@@ -31,6 +31,30 @@ export class UserService {
     });
   }
 
+  public updateUser(user: User): Observable<User> {
+    return this.http.put<User>(API_URL + 'admin/user-update', user, {
+      headers: this.headers,
+    });
+  }
+
+  public updateUserFirstname(id: number, firstname: string): Observable<any> {
+    return this.http.put(API_URL + `admin/update-firstname/${id}`, firstname, {
+      headers: this.headers,
+    });
+  }
+
+  public updateUserLastname(id: number, lastname: string): Observable<any> {
+    return this.http.put(API_URL + `admin/update-lastname/${id}`, lastname, {
+      headers: this.headers,
+    });
+  }
+
+  public updateUserEmail(id: number, email: string): Observable<any> {
+    return this.http.put(API_URL + `admin/update-email/${id}`, email, {
+      headers: this.headers,
+    });
+  }
+
   public makeAdmin(email: string): Observable<any> {
     return this.http.put(API_URL + `admin/make-admin/${email}`, email, {
       headers: this.headers,

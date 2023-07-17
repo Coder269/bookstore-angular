@@ -10,6 +10,7 @@ import { UserService } from 'src/app/Service/user.service';
 })
 export class UsersComponent implements OnInit {
   users: User[];
+  currentUserId: number = 0;
 
   constructor(private userService: UserService) {
     this.users = [];
@@ -39,5 +40,50 @@ export class UsersComponent implements OnInit {
       next: () => this.getAllUsers(),
       error: (error: HttpErrorResponse) => console.log(error.message),
     });
+  }
+
+  updateUserId(id: number) {
+    this.currentUserId = id;
+    for (let user of this.users) {
+      if (user.id == id) {
+        (document.getElementById('firstname') as HTMLInputElement).value =
+          user.firstname;
+        (document.getElementById('lastname') as HTMLInputElement).value =
+          user.lastname;
+        (document.getElementById('email') as HTMLInputElement).value =
+          user.email;
+      }
+    }
+  }
+
+  updateUser() {
+    let newFirstname: string = (
+      document.getElementById('firstname') as HTMLInputElement
+    ).value;
+    let newLastname: string = (
+      document.getElementById('lastname') as HTMLInputElement
+    ).value;
+    let newEmail: string = (
+      document.getElementById('email') as HTMLInputElement
+    ).value;
+
+    this.userService.updateUserEmail(this.currentUserId, newEmail).subscribe({
+      next: () => console.log('Update Email done'),
+      error: (error: HttpErrorResponse) => console.log(error.message),
+    });
+
+    this.userService
+      .updateUserFirstname(this.currentUserId, newFirstname)
+      .subscribe({
+        next: () => console.log('Update first name done'),
+        error: (error: HttpErrorResponse) => console.log(error.message),
+      });
+
+    this.userService
+      .updateUserLastname(this.currentUserId, newLastname)
+      .subscribe({
+        next: () => this.getAllUsers(),
+        error: (error: HttpErrorResponse) => console.log(error.message),
+      });
   }
 }
