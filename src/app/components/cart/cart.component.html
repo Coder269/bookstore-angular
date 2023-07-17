@@ -39,7 +39,9 @@
       <h4>{{ totalPrice | currency : "EUR" }}</h4>
     </div>
     <div *ngIf="userCart.items.length > 0" style="text-align: center">
-      <button type="button" class="btn btn-primary btn-lg">Buy Items</button>
+      <button type="button" class="btn btn-primary btn-lg" (click)="buy()">
+        Buy Items
+      </button>
     </div>
   </div>
 </div>

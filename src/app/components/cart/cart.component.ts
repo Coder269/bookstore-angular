@@ -1,9 +1,12 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Cart } from 'src/app/Model/Cart';
+import { Purchase } from 'src/app/Model/Purchase';
 import { User } from 'src/app/Model/User';
 import { AutheticationService } from 'src/app/Service/authetication.service';
 import { CartService } from 'src/app/Service/cart.service';
+import { TransactionService } from 'src/app/Service/transaction.service';
 
 @Component({
   selector: 'app-cart',
@@ -16,7 +19,9 @@ export class CartComponent implements OnInit {
 
   constructor(
     private cartService: CartService,
-    private authenticationService: AutheticationService
+    private authenticationService: AutheticationService,
+    private transactionService: TransactionService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -55,5 +60,21 @@ export class CartComponent implements OnInit {
       next: (response: Cart) => this.getUserCart(),
       error: (error: HttpErrorResponse) => console.log(error.message),
     });
+  }
+
+  buy() {
+    for (let book of this.userCart.items) {
+      let purchase = new Purchase(
+        this.authenticationService.currentUser,
+        book,
+        book.price
+      );
+      this.transactionService.makeTransaction(purchase).subscribe({
+        next: (response: Purchase) => console.log('purchase done'),
+        error: (error: HttpErrorResponse) => console.log(error.message),
+      });
+    }
+    alert('Transaction successful');
+    this.router.navigate(['/history']);
   }
 }
