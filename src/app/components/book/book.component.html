@@ -1,5 +1,5 @@
 <div style="background-color: #e1dcc5">
-  <app-navbar></app-navbar>
+  <app-navbar [items]="itemsNumber"></app-navbar>
   <div class="d-lg-flex flex-row justify-content-center mt-3">
     <div class="me-5">
       <img class="mb-3" [src]="currentBook.imageUrl" />
@@ -17,7 +17,11 @@
         <button *ngIf="inLibrary" type="button" class="btn btn-success btn-lg">
           In Library
         </button>
-        <button *ngIf="inCart" type="button" class="btn btn-success btn-lg">
+        <button
+          *ngIf="inCart && !inLibrary"
+          type="button"
+          class="btn btn-success btn-lg"
+        >
           In Cart
         </button>
       </div>

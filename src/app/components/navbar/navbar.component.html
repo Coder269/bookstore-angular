@@ -36,8 +36,8 @@
             style="width: 40px; height: 40px"
             routerLink="/cart"
           />
-          <div *ngIf="items === 0">Empty</div>
-          <div *ngIf="items > 0">
+          <div class="text-light" *ngIf="items === 0">Empty</div>
+          <div class="text-light" *ngIf="items > 0">
             <strong> {{ items }} items</strong>
           </div>
         </li>

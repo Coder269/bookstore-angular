@@ -63,18 +63,29 @@ export class CartComponent implements OnInit {
   }
 
   buy() {
+    this.userCart.user = this.authenticationService.currentUser;
     for (let book of this.userCart.items) {
-      let purchase = new Purchase(
-        this.authenticationService.currentUser,
-        book,
-        book.price
-      );
+      let purchase = new Purchase(this.userCart.user, book, book.price);
       this.transactionService.makeTransaction(purchase).subscribe({
-        next: (response: Purchase) => console.log('purchase done'),
+        next: (response: Purchase) => this.deleteItemsFromCart(),
         error: (error: HttpErrorResponse) => console.log(error.message),
       });
     }
-    alert('Transaction successful');
-    this.router.navigate(['/history']);
+  }
+
+  deleteItemsFromCart() {
+    this.userCart.items.pop();
+
+    if (this.userCart.items.length == 0) {
+      this.userCart.user = this.authenticationService.currentUser;
+      this.cartService.updateCart(this.userCart).subscribe({
+        next: (response: Cart) => {
+          this.userCart = response;
+          alert('Transaction successful');
+          this.router.navigate(['/history']);
+        },
+        error: (error: HttpErrorResponse) => console.log(error.message),
+      });
+    }
   }
 }

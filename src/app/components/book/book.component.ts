@@ -23,6 +23,7 @@ export class BookComponent implements OnInit {
   inLibrary = false;
   inCart = false;
   userCart: Cart = new Cart(new User('', '', '', ''));
+  itemsNumber: number = 0;
 
   constructor(
     private bookService: BookService,
@@ -57,9 +58,7 @@ export class BookComponent implements OnInit {
             this.currentBook = book;
             for (let transaction of this.userPurchases) {
               if (transaction.book.id == this.id) this.inLibrary = true;
-              break;
             }
-            break;
           }
         }
         this.getUserCart();
@@ -75,6 +74,7 @@ export class BookComponent implements OnInit {
         this.userCart = respose;
         if (this.userCart == null) return;
         else {
+          this.itemsNumber = this.userCart.items.length;
           for (let book of this.userCart.items) {
             if (book.id == this.currentBook.id) this.inCart = true;
           }
@@ -87,7 +87,6 @@ export class BookComponent implements OnInit {
   }
 
   addToCart() {
-    if (this.inCart) return;
     let userId: number = this.authenticationService.currentUser.id;
     this.cartService.getUserCart(userId).subscribe({
       next: (respose: Cart) => {
@@ -99,21 +98,6 @@ export class BookComponent implements OnInit {
         console.log(error.message);
       },
     });
-
-    /*
-    let purchase: Purchase = new Purchase(
-      this.authenticationService.currentUser,
-      this.currentBook,
-      this.currentBook.price
-    );
-    this.transactionService.makeTransaction(purchase).subscribe({
-      next: (response: Purchase) => {
-        alert('Transaction is successful!');
-        this.router.navigate(['/home']);
-      },
-      error: (error: HttpErrorResponse) => console.log(error.message),
-    });
-    */
   }
   createUserCart() {
     this.userCart = new Cart(this.authenticationService.currentUser);
@@ -128,6 +112,7 @@ export class BookComponent implements OnInit {
 
   addItem() {
     this.userCart.items.push(this.currentBook);
+    this.itemsNumber = this.userCart.items.length;
     this.userCart.user = this.authenticationService.currentUser;
     this.cartService.updateCart(this.userCart).subscribe({
       next: (response: Cart) => (this.inCart = true),

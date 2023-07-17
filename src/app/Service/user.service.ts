@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, ObservableLike } from 'rxjs';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 import { User } from '../Model/User';
 
@@ -34,6 +34,20 @@ export class UserService {
   public makeAdmin(email: string): Observable<any> {
     return this.http.put(API_URL + `admin/make-admin/${email}`, email, {
       headers: this.headers,
+    });
+  }
+
+  public getUserInfo(id: number): Observable<User> {
+    this.getHeaders();
+    return this.http.get<User>(API_URL + `user-info/${id}`, {
+      headers: this.headers,
+    });
+  }
+
+  getHeaders() {
+    this.headers = new HttpHeaders({
+      authorization: 'Bearer ' + localStorage.getItem('token'),
+      'Content-Type': 'application/json; charset=UTF-8',
     });
   }
 }

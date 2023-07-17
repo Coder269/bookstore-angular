@@ -1,8 +1,10 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from 'src/app/Model/User';
 import { AutheticationService } from 'src/app/Service/authetication.service';
+import { UserService } from 'src/app/Service/user.service';
 
 @Component({
   selector: 'app-login',
@@ -15,6 +17,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private authenticationService: AutheticationService,
+    private userService: UserService,
     private router: Router
   ) {}
   ngOnInit(): void {
@@ -30,20 +33,35 @@ export class LoginComponent implements OnInit {
           next: (response: any) => {
             // Signin successful, save the token to localStorage
             localStorage.setItem('token', response.jwt);
-            this.authenticationService.currentUser.firstname =
-              response.firstname;
-            this.authenticationService.currentUser.lastname = response.lastname;
-            this.authenticationService.currentUser.role = response.role;
-            this.authenticationService.currentUser.email = response.email;
-            this.authenticationService.currentUser.password = response.password;
             this.authenticationService.currentUser.id = response.id;
-            // Redirect to protected page or home page
-            this.router.navigate(['/home']);
+            this.getUserInfo();
           },
           error: (error) => {
             this.invalidLogin = true;
           },
         });
     }
+  }
+
+  getUserInfo() {
+    this.userService
+      .getUserInfo(this.authenticationService.currentUser.id)
+      .subscribe({
+        next: (response: User) => {
+          this.authenticationService.currentUserDB = response;
+          this.authenticationService.currentUser.firstname =
+            this.authenticationService.currentUserDB.firstname;
+          this.authenticationService.currentUser.lastname =
+            this.authenticationService.currentUserDB.lastname;
+          this.authenticationService.currentUser.email =
+            this.authenticationService.currentUserDB.email;
+          this.authenticationService.currentUser.password =
+            this.authenticationService.currentUserDB.password;
+
+          // Redirect to protected page or home page
+          this.router.navigate(['/home']);
+        },
+        error: (error: HttpErrorResponse) => console.log(error.message),
+      });
   }
 }

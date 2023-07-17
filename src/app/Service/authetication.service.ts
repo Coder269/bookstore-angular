@@ -15,6 +15,7 @@ const API_URL = environment.baseApiUrl;
   providedIn: 'root',
 })
 export class AutheticationService {
+  currentUserDB: User = new User('', '', '', '');
   currentUser: User = new User('', '', '', '');
 
   constructor(private http: HttpClient) {}

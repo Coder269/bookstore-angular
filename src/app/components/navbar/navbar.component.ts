@@ -25,9 +25,9 @@ export class NavbarComponent implements OnInit {
     private cartService: CartService,
     private router: Router
   ) {
-    this.currentUserFirstname = authenticationService.currentUser.firstname;
-    this.currentUserLastname = authenticationService.currentUser.lastname;
-    this.currentUserRole = authenticationService.currentUser.role;
+    this.currentUserFirstname = authenticationService.currentUserDB.firstname;
+    this.currentUserLastname = authenticationService.currentUserDB.lastname;
+    this.currentUserRole = authenticationService.currentUserDB.role;
   }
   ngOnInit(): void {
     this.getUserCart();
