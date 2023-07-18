@@ -68,8 +68,9 @@ export class UsersComponent implements OnInit {
     ).value;
 
     this.userService.updateUserEmail(this.currentUserId, newEmail).subscribe({
-      next: () => console.log('Update Email done'),
-      error: (error: HttpErrorResponse) => console.log(error.message),
+      next: () => console.log('update successful'),
+      error: (error: HttpErrorResponse) =>
+        alert('Error updating email, email already exists!'),
     });
 
     this.userService
