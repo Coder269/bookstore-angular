@@ -14,6 +14,7 @@ import { UserService } from 'src/app/Service/user.service';
 export class LoginComponent implements OnInit {
   user: User = new User('', '', '', '');
   invalidLogin = false;
+  errorMessage = '';
 
   constructor(
     private authenticationService: AutheticationService,
@@ -36,8 +37,9 @@ export class LoginComponent implements OnInit {
             this.authenticationService.currentUser.id = response.id;
             this.getUserInfo();
           },
-          error: (error) => {
+          error: (error: HttpErrorResponse) => {
             this.invalidLogin = true;
+            this.errorMessage = error.error;
           },
         });
     }
